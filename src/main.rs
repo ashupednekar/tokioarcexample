@@ -21,14 +21,10 @@ async fn main() {
         // Arc wrapping variables to make them 'static
         let fname = Arc::new(fnames[i]);
         let lname = Arc::new(lnames[i]);
-
-        let var1 = Arc::clone(&fname);
-        let var2 = Arc::clone(&lname);
-
         // Spawn the task
         task::spawn(async move {
             // Call foo function inside the task
-            let result = foo(&*var1, &*var2).await;
+            let result = foo(&fname, &lname).await;
             println!("{}", result);
         });
     }
